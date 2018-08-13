@@ -1016,7 +1016,8 @@ class Gantt {
             date_format: 'YYYY-MM-DD',
             popup_trigger: 'click',
             custom_popup_html: null,
-            language: 'en'
+            language: 'en',
+            readonly: false
         };
         this.options = Object.assign({}, default_options, options);
     }
@@ -1562,6 +1563,8 @@ class Gantt {
     }
 
     bind_bar_events() {
+        if (this.options.readonly) return;
+
         let is_dragging = false;
         let x_on_start = 0;
         let y_on_start = 0;
