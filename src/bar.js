@@ -195,11 +195,15 @@ export default class Bar {
     show_popup() {
         if (this.gantt.bar_being_dragged) return;
 
-        const start_date = date_utils.format(this.task._start,
-            this.gantt.options.popup_date_format);
+        const start_date = date_utils.format(
+            this.task._start,
+            this.gantt.options.popup_date_format,
+            this.gantt.options.language
+        );
         const end_date = date_utils.format(
             date_utils.add(this.task._end, -1, 'second'),
-            this.gantt.options.popup_date_format
+            this.gantt.options.popup_date_format,
+            this.gantt.options.language
         );
         const subtitle = start_date + ' - ' + end_date;
 
