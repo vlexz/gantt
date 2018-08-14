@@ -78,7 +78,8 @@ export default class Gantt {
             popup_trigger: 'click',
             custom_popup_html: null,
             language: 'en',
-            readonly: false
+            readonly: false,
+            popup_date_format: 'MMM D'
         };
         this.options = Object.assign({}, default_options, options);
     }

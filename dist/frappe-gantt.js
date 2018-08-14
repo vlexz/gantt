@@ -576,10 +576,11 @@ class Bar {
     show_popup() {
         if (this.gantt.bar_being_dragged) return;
 
-        const start_date = date_utils.format(this.task._start, 'MMM D');
+        const start_date = date_utils.format(this.task._start,
+            this.gantt.options.popup_date_format);
         const end_date = date_utils.format(
             date_utils.add(this.task._end, -1, 'second'),
-            'MMM D'
+            this.gantt.options.popup_date_format
         );
         const subtitle = start_date + ' - ' + end_date;
 
@@ -1017,7 +1018,8 @@ class Gantt {
             popup_trigger: 'click',
             custom_popup_html: null,
             language: 'en',
-            readonly: false
+            readonly: false,
+            popup_date_format: 'MMM D'
         };
         this.options = Object.assign({}, default_options, options);
     }
