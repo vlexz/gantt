@@ -122,6 +122,7 @@ export default class Bar {
 
     draw_resize_handles() {
         if (this.invalid) return;
+        if (this.gantt.options.readonly) return;
 
         const bar = this.$bar;
         const handle_width = 8;
