@@ -24,6 +24,20 @@ const month_names = {
         'November',
         'December'
     ],
+    es: [
+        'Enero',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre'
+    ],
     ru: [
         'Январь',
         'Февраль',
@@ -37,6 +51,34 @@ const month_names = {
         'Октябрь',
         'Ноябрь',
         'Декабрь'
+    ],
+    ptBr: [
+        'Janeiro',
+        'Fevereiro',
+        'Março',
+        'Abril',
+        'Maio',
+        'Junho',
+        'Julho',
+        'Agosto',
+        'Setembro',
+        'Outubro',
+        'Novembro',
+        'Dezembro'
+    ],
+    fr: [
+        'Janvier',
+        'Février',
+        'Mars',
+        'Avril',
+        'Mai',
+        'Juin',
+        'Juillet',
+        'Août',
+        'Septembre',
+        'Octobre',
+        'Novembre',
+        'Décembre'
     ]
 };
 
@@ -602,7 +644,7 @@ class Bar {
             target_element: this.$bar,
             title: this.task.name,
             subtitle: subtitle,
-            task: this.task
+            task: this.task,
         });
     }
 
@@ -957,6 +999,8 @@ class Popup {
 
     hide() {
         this.parent.style.opacity = 0;
+        this.parent.style.left = '-1000px';
+        this.parent.style.top = '-1000px';
     }
 }
 
