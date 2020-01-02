@@ -1412,29 +1412,48 @@ class Gantt {
 
     make_grid_highlights() {
         // highlight today's date
-        if (this.view_is('Day')) {
-            const x =
-                date_utils.diff(date_utils.today(), this.gantt_start, 'hour') /
-                this.options.step *
-                this.options.column_width;
-            const y = 0;
-
-            const width = this.options.column_width;
-            const height =
-                (this.options.bar_height + this.options.padding) *
-                    this.tasks.length +
-                this.options.header_height +
-                this.options.padding / 2;
-
-            createSVG('rect', {
-                x,
-                y,
-                width,
-                height,
-                class: 'today-highlight',
-                append_to: this.layers.grid
-            });
+        let startingDate = null;
+        if (this.view_is('Quarter Day')) {
+            startingDate = date_utils.today();
+            startingDate.setHours(Math.floor(new Date().getHours() / 6) + 3);
+        } else if (this.view_is('Half Day')) {
+            startingDate = date_utils.today();
+            startingDate.setHours(Math.floor(new Date().getHours() / 12));
+        } else if (this.view_is('Day')) {
+            startingDate = date_utils.today();
+        } else if (this.view_is('Week')) {
+            startingDate = date_utils.today();
+            startingDate.setDate(
+                startingDate.getDate() - startingDate.getDay()
+            );
+        } else if (this.view_is('Month')) {
+            startingDate = date_utils.today();
+            startingDate.setDate(0);
+        } else if (this.view_is('Year')) {
+            startingDate = date_utils.today();
+            startingDate.setDate(0);
+            startingDate.setMonth(0);
         }
+        const x =
+            date_utils.diff(startingDate, this.gantt_start, 'hour') /
+            this.options.step *
+            this.options.column_width;
+        const y = 0;
+        const width = this.options.column_width;
+        const height =
+            (this.options.bar_height + this.options.padding) *
+                this.tasks.length +
+            this.options.header_height +
+            this.options.padding / 2;
+
+        createSVG('rect', {
+            x,
+            y,
+            width,
+            height,
+            class: 'today-highlight',
+            append_to: this.layers.grid
+        });
     }
 
     make_dates() {
