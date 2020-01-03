@@ -613,19 +613,23 @@ class Bar {
                 // just finished a move action, wait for a few seconds
                 return;
             }
-
+            let coords = null;
             if (e.type === 'click') {
                 this.gantt.trigger_event('click', [this.task]);
+                let container = e.target.ownerSVGElement.parentElement;
+                coords = { x: e.layerX + container.scrollLeft, y: e.layerY };
             }
 
             this.gantt.unselect_all();
             this.group.classList.toggle('active');
 
-            this.show_popup();
+            console.log(e);
+
+            this.show_popup(coords);
         });
     }
 
-    show_popup() {
+    show_popup(coords) {
         if (this.gantt.bar_being_dragged) return;
 
         const start_date = date_utils.format(
@@ -645,6 +649,8 @@ class Bar {
             title: this.task.name,
             subtitle: subtitle,
             task: this.task,
+            position: 'down',
+            coords
         });
     }
 
@@ -991,6 +997,18 @@ class Popup {
             this.pointer.style.transform = 'rotateZ(90deg)';
             this.pointer.style.left = '-7px';
             this.pointer.style.top = '2px';
+        } else if (options.position === 'down') {
+            if (!options.coords) {
+                return;
+            } else {
+                this.parent.style.left = options.coords.x + 'px';
+                this.parent.style.top =
+                    position_meta.y + position_meta.height + 10 + 'px';
+            }
+
+            this.pointer.style.transform = 'rotateZ(180deg)';
+            this.pointer.style.left = '10px';
+            this.pointer.style.top = '-17px';
         }
 
         // show

@@ -181,19 +181,23 @@ export default class Bar {
                 // just finished a move action, wait for a few seconds
                 return;
             }
-
+            let coords = null;
             if (e.type === 'click') {
                 this.gantt.trigger_event('click', [this.task]);
+                let container = e.target.ownerSVGElement.parentElement;
+                coords = { x: e.layerX + container.scrollLeft, y: e.layerY };
             }
 
             this.gantt.unselect_all();
             this.group.classList.toggle('active');
 
-            this.show_popup();
+            console.log(e);
+
+            this.show_popup(coords);
         });
     }
 
-    show_popup() {
+    show_popup(coords) {
         if (this.gantt.bar_being_dragged) return;
 
         const start_date = date_utils.format(
@@ -213,6 +217,8 @@ export default class Bar {
             title: this.task.name,
             subtitle: subtitle,
             task: this.task,
+            position: 'down',
+            coords
         });
     }
 

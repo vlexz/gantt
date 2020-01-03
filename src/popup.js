@@ -56,6 +56,18 @@ export default class Popup {
             this.pointer.style.transform = 'rotateZ(90deg)';
             this.pointer.style.left = '-7px';
             this.pointer.style.top = '2px';
+        } else if (options.position === 'down') {
+            if (!options.coords) {
+                return;
+            } else {
+                this.parent.style.left = options.coords.x + 'px';
+                this.parent.style.top =
+                    position_meta.y + position_meta.height + 10 + 'px';
+            }
+
+            this.pointer.style.transform = 'rotateZ(180deg)';
+            this.pointer.style.left = '10px';
+            this.pointer.style.top = '-17px';
         }
 
         // show
