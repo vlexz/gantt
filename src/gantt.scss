@@ -150,11 +150,13 @@ $handle-color: #ddd !default;
 		.title {
 			border-bottom: 3px solid $blue;
 			padding: 10px;
+			white-space: nowrap;
 		}
 
 		.subtitle {
 			padding: 10px;
 			color: #dfe2e5;
+			white-space: nowrap;
 		}
 
 		.pointer {
