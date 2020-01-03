@@ -67,7 +67,7 @@ export default class Popup {
 
             this.pointer.style.transform = 'rotateZ(180deg)';
             this.pointer.style.left = '10px';
-            this.pointer.style.top = '-17px';
+            this.pointer.style.top = '-12px';
         }
 
         // show
